@@ -6,15 +6,16 @@ export default function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const c = canvasRef.current
+    if (!c) return
+    const canvasEl: HTMLCanvasElement = c
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvasEl.getContext('2d')
     if (!ctx) return
 
     const setCanvasSize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      canvasEl.width = window.innerWidth
+      canvasEl.height = window.innerHeight
     }
     setCanvasSize()
     window.addEventListener('resize', setCanvasSize)
@@ -28,8 +29,8 @@ export default function ParticleField() {
       opacity: number
 
       constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+        this.x = Math.random() * canvasEl.width
+        this.y = Math.random() * canvasEl.height
         this.vx = (Math.random() - 0.5) * 0.5
         this.vy = (Math.random() - 0.5) * 0.5
         this.radius = Math.random() * 2 + 0.5
@@ -40,10 +41,10 @@ export default function ParticleField() {
         this.x += this.vx
         this.y += this.vy
 
-        if (this.x < 0) this.x = canvas.width
-        if (this.x > canvas.width) this.x = 0
-        if (this.y < 0) this.y = canvas.height
-        if (this.y > canvas.height) this.y = 0
+        if (this.x < 0) this.x = canvasEl.width
+        if (this.x > canvasEl.width) this.x = 0
+        if (this.y < 0) this.y = canvasEl.height
+        if (this.y > canvasEl.height) this.y = 0
       }
 
       draw() {
@@ -62,7 +63,7 @@ export default function ParticleField() {
 
     const animate = () => {
       if (!ctx) return
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
 
       particles.forEach(particle => {
         particle.update()
