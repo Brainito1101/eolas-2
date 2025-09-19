@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 10 10 15;
+    --foreground: 255 255 255;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-eolas-dark text-white;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-eolas-blue via-eolas-purple to-eolas-pink;
+  }
+
+  .glow {
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+  }
+
+  .glass {
+    @apply backdrop-blur-md bg-white/5 border border-white/10;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gentle background pan animation */
+  @keyframes bg-pan {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1.05);
+    }
+    50% {
+      transform: translate3d(-2%, -2%, 0) scale(1.08);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1.05);
+    }
+  }
+
+  .animate-bg-pan {
+    animation: bg-pan 30s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-bg-pan {
+      animation: none !important;
+    }
+  }
+}
